@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Move On D Go Log-in Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('ULAPS.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container-box {
+      display: flex;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 900px;
+      max-width: 95%;
+      backdrop-filter: blur(10px);
+    }
+
+    .image-side {
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .image-side img {
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .form-side {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-side h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    label {
+      font-weight: 500;
+    }
+
+    input.form-control {
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .form-check-label {
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container-box">
+    <div class="image-side">
+      <img src="logokoto.png" alt="Logo">
+    </div>
+
+    <div class="form-side">
+      <h2>Login</h2>
+
+      <div class="mb-3">
+        <label for="usernameInput" class="form-label">Username:</label>
+        <input type="text" class="form-control" id="usernameInput" placeholder="Enter your username">
+      </div>
+
+      <div class="mb-3">
+        <label for="passwordInput" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Enter your password">
+      </div>
+
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="showPasswordCheck" onclick="togglePassword()">
+        <label class="form-check-label" for="showPasswordCheck">Show Password</label>
+      </div>
+
+      <button onclick="greetUser()" class="btn btn-primary w-100">Login</button>
+
+      <div id="greetingAlert" class="alert alert-info mt-4 d-none" role="alert"></div>
+
+      <div class="mt-3 text-center">
+        Don't have an account? <a href="#">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passField = document.getElementById("passwordInput");
+      passField.type = passField.type === "password" ? "text" : "password";
+    }
+
+    function greetUser() {
+      const username = document.getElementById("usernameInput").value.trim().toLowerCase();
+      const password = document.getElementById("passwordInput").value.trim();
+      const alertBox = document.getElementById("greetingAlert");
+
+      const allowedUsers = [
+        { username: "admin", password: "admin123" },
+        { username: "ferds", password: "qt" },
+        { username: "faith", password: "pangit" },
+        { username: "shashin", password: "maiquez" }
+
+      ];
+
+      if (!username && !password) {
+        alert("Please enter your username and password!");
+        return;
+      } else if (!username) {
+        alert("Please enter your username!");
+        return;
+      } else if (!password) {
+        alert("Please enter your password!");
+        return;
+      }
+
+      const isValid = allowedUsers.some(user =>
+        user.username === username && user.password === password
+      );
+
+      if (isValid) {
+        alertBox.innerText = `Welcome, ${username}! Logging In Please wait.`;
+        alertBox.classList.remove("d-none", "alert-warning");
+        alertBox.classList.add("alert-info");
+
+        setTimeout(() => {
+          window.location.href = "mainpage.html";
+        }, 3000);
+      } else {
+        alertBox.innerText = " Invalid username or password!";
+        alertBox.classList.remove("d-none", "alert-info");
+        alertBox.classList.add("alert-warning");
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
